@@ -1,0 +1,10 @@
+Locators Concept :
+
+This concept is used to identify the elemnet on the page.
+There are seven types of locators.They are:
+1.xpath - 
+ *which generally gives the position of the element.
+ *always use relative xpath(short)
+ *absolute xpath cannot be used as it gives the hierarchy of the position of the element.In future if the position of the element changes, selenium fails to recognise it.
+ *
+	

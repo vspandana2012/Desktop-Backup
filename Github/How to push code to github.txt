@@ -1,0 +1,37 @@
+How to move new project code to github account ??
+
+Step 1 : Go to the source folder which must be moved to github.(C:\Users\Nbarnana\eclipse-workspace\SampleProject)
+Step 2 : Right click and select git bash
+	-> Git Bash command prompt opens.
+Step 3 : To move the code to github create a new repository with the source name or with any name in the github.com after logging in.So that you can move the code to that repository from local.
+	-> Login to https://github.com/login (My credentials : userid - vspandana2012 ; password : Automation@009)
+	-> Click on '+' sign on the task bar and click 'New Repository' and provide the name(Selenium Sample Project) and description(Naveen Automation Lab Tutorial) to the repository.
+		New Repository is created
+Step 4 : Now go to the git bash commad prompt and type git init and press enter.
+	git init - It initializes the github as a result .git folder is created automatically in your local project folder(C:\Users\Nbarnana\eclipse-workspace\SampleProject) repository
+Step 5 : Enter git remote add origin "URL" and press enter($ get remote add origin "https://github.com/vspandana2012/Selenium-Sample-Project.git")
+	URL - Get the url from the github.com
+	Click the clone/download option and copy the url.
+Step 6 : Enter git pull origin master and press enter($ git pull origin master)
+	master - this is the branch name which you can get from the github.
+Step 7 : Get the status ny using git status command($ git status)
+	It gets the status of the code which needs to be moved to the github from local repository
+Step 8 : Use git add. to add the code to the github($ git add.)
+	With the help of this command we can just add the code to staging area which is the intermediate stage between loacl repository and the centralized repository(github).
+Step 9 : To save it or to move to the centralized repository we need to use git commit command($ git commit -m "message"). We can pass any message($ git commit -m "Success")
+Step 10: To reflect the codde in the github repository use the command git push origin master.Refresh the github site then you can find the details of your code which you have moved.
+
+How to update the changes made to the existing project code to github ??
+
+Step 1 : Go to the source folder which must be moved to github.(C:\Users\Nbarnana\eclipse-workspace\SampleProject)
+Step 2 : Right click and select git bash
+	-> Git Bash command prompt opens.
+Step 3 : Use git status command to get the status of the code which must be uploaded to the github.If everything is updated then it gives message as nothing to commit else it gives the folder details whoc must be committed.
+Step 4 : Use git add. to add the code to the github($ git add.)
+	With the help of this command we can just add the code to staging area which is the intermediate stage between loacl repository and the centralized repository(github).
+Step 5 : To save it or to move to the centralized repository we need to use git commit command($ git commit -m "message"). We can pass any message($ git commit -m "Success").
+Step 6: To reflect the codde in the github repository use the command git push origin master.Refresh the github site then you can find the details of your code which you have moved.
+ 
+  
+	
+

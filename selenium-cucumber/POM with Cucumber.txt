@@ -1,0 +1,11 @@
+Cucumber BDD Framework with PageObjectModel pattern
+
+Base Class: Webdriver initialization, read properties from the config file
+Page Layer: All page classes
+Feature file
+step defination file
+Test runner class
+
+INCIN0007738442 
+
+himanshu.d.singh

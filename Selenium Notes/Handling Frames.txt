@@ -1,0 +1,184 @@
+Handling Iframes 
+
+Sometimes you see that element is not found( org.openqa.selenium.NoSuchElementException), the reason for this might be the xpath is wrong or the element is present in a frame.
+Hierarchy : Browser -> Page -> Frame 
+
+To click on the objects present on frame we need to switch to the frame from the page.
+* We need to  use driver.switchTo.frame()
+The following are the properties of frame.
+1.Index which starts from 0(Index = 0, If there are three frames we specified the first frame with index = 0)
+2.Name
+
+How to know whether the frame exists or not????
+
+* Right click just above the element you can find an option called "This frame" or else click "View page source" where you can find the frames.
+* Once you get the details of the frames use driver.switchTo.frame()//You can use either frame(int 0)(using index) or frame(frame name)(using name)to get control over the particular frame.
+
+MouseMovements(Hover) 
+
+When you need to just hover on the elements to see the submenu we use this.
+When you get elementNotVisible or elementNotAvailable exception
+
+* We need to create one ACTIONS class object to work with the mouse hover movements.
+* In Actions object we need to pass the driver object similar to Select which is used for dropdown.But in Select we pass the element[Select select = new Select(driver.findElement(By.name("state")));] but here just the driver is passed[Actions action = new Actions(driver);].
+* With the object we can access a method moveToElement(action.moveToElement) where you need to specific the target element.It just moves to the p[articular element it doesn't click.
+* Whenever we use Actions class always remember the we need to use .build() & .perform() methods for the action to perform.
+* To click on particular element spy that element and use .click() method.
+
+How to maximise the Screen?
+
+* Once the chrome driver is launched,use manage , window and maximise methods to maximise.
+driver.manage().window().maximize()
+
+How to delete all the previous cookies??
+
+* To delete the cookies we can use deleteAllCookies method
+driver.manage().deleteAllCookies()
+
+How to wait till the page is loaded?
+
+Use driver.manage().timeouts().pageLoadTimeout(40,TimeUnit.SECONDS)
+Use driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS)
+
+Drag & Drop Concept 
+
+Follow the same procedure how you do it manually.
+
+* Check whether the elements are in a frame.If they are in frame switch to that frame using switchTo().frame() and then perform click and drag functions.
+  else directly proceed with click and drag functions.Now a days according to w3c standards the frames are not used.For old applications we might find some frames.
+* Click and Hold the source object(which is to be moved)-draggable.Use action.ClickAndHold() function for this and pass the draggable object using any selector.
+* Drag and drop on to the target object(on which the source must be dropped)- droppable.Use .draganddrop() function and pass the source and the target elements using the selectors.
+* Finally release it by using the release() function
+
+Implicit Wait
+
+* Thread.sleep() is static wait whereas implicit wait is dynamic wait.
+* Sometimes it takes time for the page to load,in the meantime it executes the next step which finally results in element not visible exception.To avoid this we can use driver.manage().timeouts().pageLoadtimeOut() which dynamically waits for the particular time(maximum time) mentioned.Suppose if the page is loaded before the sepcified time then it move to the next step though the specified time is not completed.	
+* driver.manage().pageLoadTimeOut() function is very dynamic, on the safer side we can use another function called driver.manage().timeouts().implicitlywait().
+* implicitWait() is for all the elements.These two waits are global waits.Implicit wait is applicable for all the elements which are available on the page.Once the page is fully loaded we inform selenium to wait for some more specified for all the elements to load.If the elements are loaded in less time than specified then the rest of the time is ignored.
+
+How to write Dynamic xpath??
+
+* To write the dynamic xpath first start with // then write the html tag and open sqyuare brackets in which you need to mention the property with @ and the value in single quotes.
+ driver.findElement(By.xpath("//input[@name='query']").sendKeys("Java") where input is the html tag,name is the property which I have chosen and query is the value of name property.
+
+* There is a function called contains() in xpath which contains property with @ and the value of property in single quotes.These two are separated by comma.
+ driver.findElement(By.xpath("//input[contains(@name , 'query')]")).sendKeys("Java")
+
+How do you handle dynamic id?? - interview question
+
+* If the property is changing dynamically suppose intially 
+id = test_123 we can use By.id("test_123")
+After sometime it chnages to test_456 then selenium fails ti detect the element with the above syntax.
+When the property is changing dynamically we need to write dynamic xpath using contains() function so that you can mention only the repetition part of the id is mentioned.
+i.e By.xpath("//input[contains(@id,'test_')]") 
+
+* Other than contains() function we can use starts-with() function
+driver.findElement(By.xpath("//input[starts-with(@id,'test_')])").sendKeys("Test")
+
+* We can use ends-with() function based on the pattern of the id which is changing dynamically.
+driver.findElement(By.xpath("//input[ends-with(@id,'test')])")
+
+How to write dynamic xpath for link??(class : CustomXpath)
+
+* Every link starts with html tag 'a'
+* We can use conytains() function for this.Inside contains() function we use another function call test() and provide the text mentioned for the link.
+driver.findElement(By.xpath("//a[contains(test(),'My Account')]")).click();
+
+Reasons why absolute xpath is not recommended :(class : CustomXpath)
+
+* We face performance issue.It takes more time when compared to custom xpath.Custom xpath is more fater than absolute.
+* It is not reliable
+* This path can be changed any time in future.
+
+FindElements Concept : interview question**(class : FindElementsConcept)
+
+How to get the total count of links or webbuttons along with text on the page?
+
+* For this concept we use driver.findElements(By.tagName("a")) 
+'a' is the html tag element.This method gives you a list of elements.
+So use list concept and create an object for list to get the  Eg : List<WebElement> linkList = driver.findElements(By.tagName(""));
+
+* Whenever we use driver.findElements() we need to use List<WebElement> on the left side as the findElements() method returns a list of elements.
+
+* Print the number of list elements by using System.out.println(linkList.size())
+
+* To get the elements from array or list use .get(index) method and to get the text use getText()
+
+* In the console you will get the names of all the links.Sometimes you get blank spaces that indicartes that there is no text in that particular link,they just have used <a> tag
+
+How to simulate the forward and backward buttons on the browser or how to get navigate to some external url or how to come back and ckick forward button?(class : Navigation) - interview question
+
+This concept is called simulating the back and forward buttons of the browser.This is part of browser.The forward and backward buttons are a part of browser.
+* To navigate to required page use navigate().to("") function i.e from google website to amazon website
+* To navigate back to google website use navigate.back() function.
+* To navigate forward to amazon website use navigate.forward() function. 
+* To refresh the page use driver.navigate().refresh()
+
+driver.get() & driver.navigate().to() are used to fetch the urls, but the driver.navigate().to() is used to switch to an external url.
+
+How to take a Screenshot??(class : TakeScreenshotConcept)
+
+To take a screenshot we use getScreenshotAs() method which returns a File object.We are typecasting the driver to TakesScreenshot which is an interface.
+Specify the location where the screenshot must be saved by using FileUtils.copyFile(src,new File()) where src is the file object created in the above step.
+
+Explicit Wait : (class : ExplicitWaitConcept)
+
+Some elements appear after sometime even after the page is loaded completely.In this case we can put explicit wait for particular elements.If the page is loaded completly loaded it doesn't mean that all the elements are completely loaded.Sometimes ajax components or some links or elements are not loaded completely.
+Here we can use explicit wait so that selenium will wait till the element is loaded.Suppose if there are two drop downs out of which one is the list of all the states and the other is the list of all the cities which are present in the respective.Both are interelated.When you select one state it takes time for the other drop down to get all the cities of that respective state.Here we can make use of explicit wait.
+
+*Create a method clickOn with three args they are WebDriver driver,WebElement locator,int timeout
+*Create an object for inbuilt WebDriverWait class which takes two parameters one is driver and the other is timeout(how much time I wanted to wait) and ignore StaleElementReferenceException using ignoring function until expected conditions is met i.e the element to be clickable function which takes locator as the parameter in this case.Expected conditions is also an inbuilt class in selenium.
+*then write locator.click()
+
+If the element is viisible before the timeout then it ignores the rest of the time left.This is very dynamic in nature.
+The is very strong wait which is called synchronisation point in selenium using explicit wait.Explicit wait is specific for only particular element not for all the elements.
+
+The function is void which doesn't return anything.
+
+The following is the function for explicit wait.Call this method in main method.
+
+ public static void clickOn(WebDriver driver,WebElement locator,int timeout) {
+		new WebDriverWait(driver,timeout).ignoring(StaleElementReferenceException.class).until(ExpectedConditions.elementToBeClickable(locator));
+		locator.click();
+	}
+
+How to handle Browser Window Pop Up *****
+
+The properties of browser window pop up is it has title,url and its just like another webpage.You can minimise or maximise this window.
+To handle this we need to do following steps.
+
+* You have parent window and the child window
+* Switch to chil window(popup window)
+* Perform some actions there and close the popup window
+* Switch back to parent window again
+
+To switch to the popup window we need to use window id and to handle this scenario(i.e to get the window id) we have WindowHandler api in selenium. 
+Use driver.getWindowHandles() as we have two windows.The function gives a Set object.This object gives the window ids.Set doesn't store the window ids in the form of index.
+So, to get the values from Set object we use iterator() method which gives a Iterator<> object.Iterator object points on top of the set object.We need to shift the iterator to the place where the value is present for this we need to use it.next() [it : Iterator object] This will point the iterator to the plave where value is present.
+it.next() gives string object.Everytime we need to use it.next() to move to the next value of the Set.
+
+We cannot get the wwindow ids without using the Set object because we cannot spy the child window.We need to get the window ids at run time. **interview question 
+
+Difference between driver.close() and driver.quit() **** interview question 
+
+* driver.quit() is used to close all the browsers
+* driver.close() is used to close the specific browser on which the control is there.
+
+Different types of Browser PopUps :
+
+There are three different types of Browswer PopUps. They are :
+
+1.File Upload PopUp --  Browse button (type="file",sendKeys(path) class : HandleFileUploadPopUp)
+2.Confirmation PopUp like JavaScript PopUp or Alerts -- Alert API(accept(),dismiss() class : AlertPopUpHandle)
+3.Browser Window PopUp -- Advertisement PopUp (windowHandler API - getWindowHandles() class : HandleWindowPopUp)
+
+
+
+
+
+
+
+
+
+

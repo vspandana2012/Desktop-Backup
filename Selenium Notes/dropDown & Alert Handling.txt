@@ -1,0 +1,34 @@
+Handling the Drop Down(class :HandleDropBox)
+
+To handle the elements in dropdown we need to use Select class.
+
+Pass the element on which the select class must be operated as element.
+Use selectbyVisible property to select the particular value from dropdown. 
+
+Handling the Alerts or PopUps which are Browser based or Webbased(class : AlertPopUpHandle)
+
+Generally these alerts or popups or warnings which are webbased are written using javascript by the developers.So we cannot spy these.
+To handle the popup we need to do two things
+* first get the text present in the popup
+That implies that we need to switch from the background window to the popup window.So use driver.switchTo().alert() method for switching between the windows.It will give control on popup or alert is obtained.This particular alert method will give an object of Alert class,which can be stored in a reference of Alert class.To get the text on the popup use getText() method and you print it using syso.
+
+* then perform the action which you wnat to do either to click yes or no or ok etc based on the options mentioned in the popup
+Once you get the text you can guve your inout eithr ok or cancel using accept() or dismiss() methods respectively.
+
+Thread.sleep()
+
+This method is used to pause or wait the script to run for some milliseconds specified in the sleep function.
+If you want to pause the script for 5 seconds then the script is Thread.sleep(5000)
+This method throws InterruptedException.
+
+Handling the File Upload popup or Browser PopUp(class : HandleFileUploadPopUp) - interview questions
+
+To upload a file you need to select the file from you desktop or C drive etc..which is related to windows.This popup or alert is window based.Selenium can't handle the window based popups or alerts.
+
+To handle this
+*First spy the browse or file upload button on the webpage.Don't click the browser as the windows popup appears and the selenium cannot handle it.
+*Instead of click function use sendkeys function to pass the path location of the file.
+
+This is applicable for all the browse buttons where we need to upload the files but we need to check that the type of the browse button when you spy it must be file when we spy that object(type = "file").- ** interview question
+
+

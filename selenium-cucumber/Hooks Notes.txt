@@ -1,0 +1,46 @@
+Hooks:
+
+1)Used to define  pre-requisite adn post requisite for each scenario
+2)Pre-Requisites: Like initializing the driver, launching the browser, Test data creation, Database connections, Report initialization
+3)Post-Requisites; Like closing the driver, browser, closing he database connections
+
+Two hooks available:
+
+1)@Before
+2)@After
+
+@Before
+public void setUP()
+{
+}
+
+@After
+public void tearDown()
+{
+
+}
+
+@Before : will execute before for each scenario
+@After   : Will execute after each scenario
+
+Tagged Hooks: If we want to do pre-requisite and post-requisite for a particular scenario then we use tagged hooks.
+
+Example below
+
+@first
+Scenario: Testing CRM Application
+Given user is on landing page
+When user enter login URL
+Then user enters username and password
+
+@Before(@first)
+public void firstTest()
+{
+Syso("This will execute only  for first scenario ")
+}
+
+Ordered Hooks: If there are multiple pre-requisites and post requisites then we can use order to define
+@Before(order=0) : This will execute first before each scenario 
+@Before(order=1): This will execute second before each scenario
+@After(order=0): 
+@After(order=1)
